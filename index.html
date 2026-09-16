@@ -986,7 +986,20 @@
       border-color: #165dff;
     }
 
-    /* ===== 弹窗 ===== */
+    /* ===== 异常原因变更 ===== */
+    .modal.alert-modal.reason-change-modal { width: 500px; max-width: calc(100vw - 32px); }
+    .reason-change-summary { background: #f5f7fa; border: 1px solid #e8eaf0; border-radius: 6px; padding: 12px 14px; color: #666; line-height: 28px; margin-bottom: 16px; }
+    .reason-change-summary b { color: #1a1a1a; }
+    .reason-change-summary .reason-change-waybills { max-height: 58px; overflow-y: auto; word-break: break-all; }
+    .reason-change-form { display: flex; flex-direction: column; gap: 14px; }
+    .reason-form-item { display: flex; flex-direction: column; gap: 6px; }
+    .reason-form-item label { font-size: 13px; color: #555; }
+    .reason-form-item em { color: #f5222d; font-style: normal; }
+    .reason-form-control { width: 100%; min-height: 36px; border: 1px solid #dcdfe6; border-radius: 4px; padding: 7px 10px; font-size: 14px; color: #333; background: #fff; outline: none; }
+    .reason-form-control:focus { border-color: #165dff; }
+    .reason-textarea { min-height: 86px; resize: vertical; line-height: 1.5; }
+    .reason-change-tip { margin-top: 14px; padding: 9px 12px; color: #8a5a00; background: #fff8e1; border: 1px solid #ffe7a3; border-radius: 4px; font-size: 12px; line-height: 1.6; }
+
     .modal-mask {
       position: fixed;
       inset: 0;
@@ -1203,6 +1216,334 @@
       display: inline-flex;
       align-items: center;
     }
+    .transfer-filter #custBatchDelBtn {
+      margin-left: auto;
+    }
+    /* 转客户中心弹窗：筛选栏右侧按钮组 */
+    .transfer-filter-actions {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    /* 转国内客服弹窗：多选+模糊搜索下拉 */
+    .cust-transfer-filter {
+      flex-wrap: wrap;
+      row-gap: 10px;
+    }
+    .cust-transfer-filter .custom-select {
+      width: 190px;
+      height: 34px;
+    }
+    /* 运单号：与异常件工单菜单一致的「批量输入」样式 */
+    .cust-transfer-filter .input-with-action {
+      width: 210px;
+    }
+    .cust-transfer-filter .form-input {
+      width: 100%;
+      height: 34px;
+      padding: 0 72px 0 12px;
+      background: #f2f3f5;
+      border: 1px solid transparent;
+      border-radius: 4px;
+      font-size: 13px;
+      color: #1f2329;
+      box-sizing: border-box;
+      outline: none;
+    }
+    .cust-transfer-filter .form-input:focus {
+      background: #ffffff;
+      border-color: #165dff;
+    }
+    .cust-transfer-filter .form-input::placeholder {
+      color: #a8abb2;
+    }
+    .cust-transfer-filter .input-action {
+      right: 10px;
+      font-size: 13px;
+    }
+    .cust-transfer-filter .custom-select-trigger {
+      height: 34px;
+      padding: 0;
+      background: transparent;
+      border: none;
+      overflow: visible;
+    }
+    .cust-transfer-filter .custom-select .search-input {
+      width: 100%;
+      height: 34px;
+      padding: 0 32px 0 12px;
+      border: 1px solid transparent;
+      border-radius: 6px;
+      background: #f2f3f5;
+      font-size: 13px;
+      color: #1f2329;
+      outline: none;
+      cursor: pointer;
+      box-sizing: border-box;
+      transition: background .15s, border-color .15s, box-shadow .15s;
+    }
+    .cust-transfer-filter .custom-select-trigger:hover .search-input {
+      background: #e9ebef;
+    }
+    .cust-transfer-filter .custom-select .search-input::placeholder {
+      color: #a8abb2;
+    }
+    .cust-transfer-filter .custom-select.open .search-input {
+      background: #ffffff;
+      border-color: #165dff;
+      box-shadow: 0 0 0 2px rgba(22, 93, 255, 0.12);
+      cursor: text;
+    }
+    /* 右侧图标：闭合=下拉箭头，展开=搜索图标 */
+    .cust-transfer-filter .custom-select .arrow-icon,
+    .cust-transfer-filter .custom-select .search-icon {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 15px;
+      height: 15px;
+      color: #8a8f99;
+      pointer-events: none;
+      transition: transform .2s, color .15s;
+    }
+    .cust-transfer-filter .custom-select .search-icon { display: none; }
+    .cust-transfer-filter .custom-select .arrow-icon { display: block; }
+    .cust-transfer-filter .custom-select.open .search-icon { display: block; color: #165dff; }
+    .cust-transfer-filter .custom-select.open .arrow-icon { display: none; }
+    /* 下拉浮层 */
+    .cust-transfer-filter .custom-select-options {
+      z-index: 40;
+      max-height: 240px;
+      padding: 4px;
+      background: #ffffff;
+      border: 1px solid #ebedf0;
+      border-radius: 8px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+    }
+    .cust-transfer-filter .custom-select-option {
+      padding: 8px 10px;
+      font-size: 13px;
+      color: #1f2329;
+      border-radius: 6px;
+      gap: 8px;
+    }
+    .cust-transfer-filter .custom-select-option:hover {
+      background: #f2f6ff;
+    }
+    .cust-transfer-filter .custom-select-option.selected {
+      color: #165dff;
+      background: #eef4ff;
+    }
+    .cust-transfer-filter .custom-select-option .option-checkbox {
+      width: 15px;
+      height: 15px;
+      accent-color: #165dff;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    /* ===== 转国内客服弹窗：历史单号入口 ===== */
+    .cust-history-entry {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      height: 28px;
+      padding: 0 10px;
+      border: 1px solid #d6e0ff;
+      background: #f2f6ff;
+      color: #165dff;
+      border-radius: 4px;
+      font-size: 12px;
+      cursor: pointer;
+      transition: background .15s, border-color .15s;
+    }
+    .cust-history-entry:hover {
+      background: #e4edff;
+      border-color: #165dff;
+    }
+    .cust-history-entry svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    /* ===== 历史记录二级弹窗 ===== */
+    #custHistoryModal { z-index: 1100; }
+    .cust-history-modal {
+      width: 1040px;
+      max-width: 95vw;
+    }
+    #transferHistoryModal { z-index: 1100; }
+    #transferHistoryModal .modal-body { padding: 16px 18px; }
+    #custHistoryModal .modal-body {
+      padding: 16px 18px;
+    }
+    /* 筛选卡片 */
+    .history-filter-card {
+      background: #f7f8fa;
+      border: 1px solid #eef0f3;
+      border-radius: 8px;
+      padding: 14px 16px 4px;
+      margin-bottom: 14px;
+    }
+    .history-filter {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px 12px;
+      row-gap: 12px;
+    }
+    .history-filter > label {
+      font-size: 13px;
+      color: #4e5969;
+      white-space: nowrap;
+    }
+    .history-filter .custom-select {
+      width: 190px;
+      height: 34px;
+    }
+    .history-date-range {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .history-filter-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      white-space: nowrap;
+    }
+    .history-filter-group > label {
+      font-size: 13px;
+      color: #4e5969;
+    }
+    .history-query-action {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+    }
+    .history-query-action .list-btn {
+      height: 34px;
+      padding: 0 22px;
+      border-radius: 6px;
+      font-size: 13px;
+    }
+    .history-date-input {
+      width: 148px;
+      height: 34px;
+      padding: 0 10px;
+      border: 1px solid transparent;
+      border-radius: 6px;
+      background: #f2f3f5;
+      font-size: 13px;
+      color: #1f2329;
+      outline: none;
+      box-sizing: border-box;
+      cursor: pointer;
+      transition: background .15s, border-color .15s, box-shadow .15s;
+    }
+    .history-date-input:hover {
+      background: #e9ebef;
+    }
+    .history-date-input:focus {
+      background: #ffffff;
+      border-color: #165dff;
+      box-shadow: 0 0 0 2px rgba(22, 93, 255, 0.12);
+      cursor: text;
+    }
+    .history-date-input::-webkit-calendar-picker-indicator {
+      cursor: pointer;
+      opacity: 0.6;
+    }
+    .date-sep {
+      font-size: 13px;
+      color: #86909c;
+    }
+    .history-table-wrap {
+      border: 1px solid #ebedf0;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+    }
+    .history-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+    .history-table th {
+      background: linear-gradient(180deg, #fafbfc, #f5f7fa);
+      color: #4e5969;
+      font-weight: 600;
+      text-align: left;
+      padding: 11px 14px;
+      white-space: nowrap;
+      border-bottom: 1px solid #e8ebef;
+    }
+    .history-table td {
+      padding: 11px 14px;
+      color: #1f2329;
+      border-bottom: 1px solid #f2f3f5;
+      white-space: nowrap;
+    }
+    .history-table tbody tr:last-child td {
+      border-bottom: none;
+    }
+    .history-table tbody tr {
+      transition: background .12s;
+    }
+    .history-table tbody tr:hover {
+      background: #f5f9ff;
+    }
+    .history-table .op-col {
+      text-align: center;
+      width: 104px;
+    }
+    .status-tag {
+      display: inline-block;
+      padding: 2px 11px;
+      border-radius: 11px;
+      font-size: 12px;
+      line-height: 19px;
+      font-weight: 500;
+    }
+    .status-tag.done { background: #e6f9ec; color: #16a34a; }
+    .status-tag.pending { background: #fff3e6; color: #ea7a16; }
+    .status-tag.revoked { background: #f1f2f5; color: #86909c; }
+    .revoke-btn {
+      border: 1px solid #ffccc7;
+      background: #fff;
+      color: #e5484d;
+      border-radius: 6px;
+      padding: 5px 14px;
+      font-size: 12px;
+      cursor: pointer;
+      transition: background .15s, border-color .15s, color .15s;
+    }
+    .revoke-btn:hover {
+      background: #fff1f0;
+      border-color: #e5484d;
+    }
+    .revoke-btn:disabled {
+      color: #c0c4cc;
+      border-color: #ebedf0;
+      background: #f7f8fa;
+      cursor: not-allowed;
+    }
+    .history-pagination {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      margin-top: 14px;
+    }
+    .history-pagination .total {
+      font-size: 13px;
+      color: #86909c;
+    }
     .modal-footer {
       display: flex;
       align-items: center;
@@ -1237,6 +1578,7 @@
       color: #ffffff;
     }
     /* 提示弹窗 */
+    #transferCheckModal { z-index: 1200; }
     .modal.alert-modal {
       width: 400px;
       height: auto;
@@ -1359,6 +1701,87 @@
       width: 14px;
       height: 14px;
     }
+    /* ===== 工单详情页 ===== */
+    .detail-layout { display: flex; align-items: flex-start; gap: 16px; }
+    .detail-main {
+      flex: 1; min-width: 0; background: #ffffff; border-radius: 8px;
+      padding: 20px 26px 24px;
+    }
+    .detail-side {
+      width: 210px; flex-shrink: 0; background: #ffffff; border: 1px solid #ebedf0;
+      border-radius: 8px; padding: 16px 0 20px; position: sticky; top: 12px; min-height: 560px;
+    }
+    .detail-side-title { font-size: 15px; font-weight: 700; color: #1f2329; padding: 0 18px 14px; }
+    .detail-side-menu { list-style: none; margin: 0; padding: 0; }
+    .detail-side-menu li {
+      position: relative; display: flex; align-items: center; gap: 8px;
+      padding: 10px 18px; font-size: 14px; color: #4e5969; cursor: pointer;
+      transition: background .15s, color .15s;
+    }
+    .detail-side-menu li::before {
+      content: ''; width: 6px; height: 6px; border-radius: 50%; background: #c9cdd4; flex-shrink: 0;
+    }
+    .detail-side-menu li:hover { color: #165dff; }
+    .detail-side-menu li.active { background: #eef4ff; color: #165dff; font-weight: 500; }
+    .detail-side-menu li.active::before { background: #165dff; }
+    .detail-side-menu li.active::after {
+      content: ''; position: absolute; right: 0; top: 0; bottom: 0; width: 3px; background: #165dff;
+    }
+    .detail-section { padding: 20px 0 24px; border-bottom: 1px solid #f0f1f3; scroll-margin-top: 12px; }
+    .detail-section:first-child { padding-top: 0; }
+    .detail-section:last-child { border-bottom: none; padding-bottom: 4px; }
+    .detail-section-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
+    .detail-section-title { display: flex; align-items: center; gap: 7px; font-size: 15px; font-weight: 700; color: #1f2329; }
+    .detail-section-title .info-icon { width: 16px; height: 16px; color: #165dff; }
+    .detail-head-actions { display: flex; align-items: center; gap: 10px; }
+    .detail-btn {
+      display: inline-flex; align-items: center; gap: 5px; height: 30px; padding: 0 12px;
+      background: #f2f3f5; border: none; border-radius: 4px; font-size: 13px; color: #1f2329;
+      cursor: pointer; transition: background .15s;
+    }
+    .detail-btn:hover { background: #e8eaed; }
+    .detail-btn svg { width: 14px; height: 14px; color: #4e5969; }
+    .detail-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px 24px; }
+    .detail-field { min-width: 0; }
+    .detail-field .f-label { font-size: 13px; color: #86909c; margin-bottom: 7px; }
+    .detail-field .f-value { font-size: 14px; color: #1f2329; word-break: break-all; line-height: 1.5; }
+    .detail-badge {
+      display: inline-block; padding: 1px 8px; border-radius: 4px; font-size: 13px;
+      background: #fff4e5; color: #d48806;
+    }
+    .detail-empty { text-align: center; color: #86909c; font-size: 14px; padding: 30px 0 40px; }
+    .log-toggle { display: inline-flex; background: #f2f3f5; border-radius: 4px; padding: 2px; }
+    .log-toggle button {
+      border: none; background: none; font-size: 13px; color: #4e5969;
+      padding: 4px 14px; border-radius: 3px; cursor: pointer;
+    }
+    .log-toggle button.active { background: #ffffff; color: #165dff; box-shadow: 0 1px 3px rgba(0, 0, 0, .08); }
+    .log-table { width: 100%; border-collapse: collapse; font-size: 13px; table-layout: fixed; }
+    .log-table th {
+      background: #f7f8fa; color: #1f2329; font-weight: 600; text-align: left;
+      padding: 10px 12px; border-bottom: 1px solid #ebedf0; white-space: nowrap;
+    }
+    .log-table td { padding: 10px 12px; color: #1f2329; border-bottom: 1px solid #f0f1f3; white-space: nowrap; }
+    .log-table tbody tr:last-child td { border-bottom: none; }
+    /* 描述列允许换行，其余列固定宽度不换行 */
+    .log-table th:nth-child(1), .log-table td:nth-child(1) { width: 112px; }
+    .log-table th:nth-child(2), .log-table td:nth-child(2) { white-space: normal; word-break: break-all; }
+    .log-table th:nth-child(3), .log-table td:nth-child(3) { width: 70px; }
+    .log-table th:nth-child(4), .log-table td:nth-child(4) { width: 100px; }
+    .log-table th:nth-child(5), .log-table td:nth-child(5) { width: 80px; }
+    .log-table th:nth-child(6), .log-table td:nth-child(6) { width: 150px; }
+    .log-table td.log-status-fail { color: #e5484d; }
+    .log-table td.log-status-ok { color: #16a34a; }
+    .log-table td.log-err { color: #e5484d; }
+    .log-err { color: #e5484d; }
+    .log-timeline { padding: 2px 0 0; }
+    .log-tl-item { position: relative; padding: 0 0 22px 24px; border-left: 1px solid #e5e7eb; margin-left: 5px; }
+    .log-tl-item:last-child { border-left-color: transparent; padding-bottom: 0; }
+    .log-tl-dot { position: absolute; left: -5px; top: 4px; width: 9px; height: 9px; border-radius: 50%; background: #165dff; }
+    .log-tl-item.fail .log-tl-dot { background: #e5484d; }
+    .log-tl-item.ok .log-tl-dot { background: #16a34a; }
+    .log-tl-title { font-size: 14px; color: #1f2329; margin-bottom: 7px; }
+    .log-tl-meta { font-size: 12px; color: #86909c; display: flex; gap: 16px; flex-wrap: wrap; }
   </style>
 </head>
 <body>
@@ -1454,6 +1877,7 @@
       </ul>
     </aside>
     <main class="content">
+      <div id="listView">
       <!-- 面包屑导航 -->
       <nav class="breadcrumb">
         <a href="#">首页</a>
@@ -1833,6 +2257,10 @@
             <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
             <span>转客户中心</span>
           </button>
+          <button type="button" class="list-btn primary-outline" id="reasonChangeBtn">
+            <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1-1 1 1-4Z"/><path d="M3 7h6"/><path d="M3 11h4"/></svg>
+            <span>异常原因变更</span>
+          </button>
           <button type="button" class="list-btn primary-outline" disabled>
             <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
             <span>通知客户</span>
@@ -1851,7 +2279,7 @@
           </button>
           <button type="button" class="list-btn primary-outline" disabled>
             <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-            <span>通知客服</span>
+            <span>通知模板</span>
           </button>
         </div>
       </div>
@@ -1942,6 +2370,100 @@
       </div>
 
       <!-- 内容区待添加 -->
+      </div>
+
+      <!-- ===== 工单详情（详情按钮进入） ===== -->
+      <div class="detail-view" id="detailView" style="display: none;">
+        <nav class="breadcrumb">
+          <a href="#" id="detailCrumbHome">首页</a>
+          <span class="separator">/</span>
+          <a href="#">异常件工单管理</a>
+          <span class="separator">/</span>
+          <span class="current" id="detailCrumbNo">-</span>
+        </nav>
+        <div class="detail-layout">
+          <div class="detail-main">
+            <!-- 工单信息 -->
+            <section class="detail-section" id="secInfo">
+              <div class="detail-section-head">
+                <div class="detail-section-title">
+                  <svg class="info-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+                  <span>工单信息</span>
+                </div>
+                <div class="detail-head-actions">
+                  <button type="button" class="detail-btn" id="detailBackBtn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+                    <span>返回</span>
+                  </button>
+                  <button type="button" class="detail-btn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
+                    <span>通知客户</span>
+                  </button>
+                  <button type="button" class="detail-btn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-2.64-6.36"/><polyline points="21 3 21 9 15 9"/></svg>
+                    <span>刷新</span>
+                  </button>
+                </div>
+              </div>
+              <div class="detail-grid" id="detailInfoGrid"></div>
+            </section>
+
+            <!-- 收件人 -->
+            <section class="detail-section" id="secReceiver">
+              <div class="detail-section-head">
+                <div class="detail-section-title"><span>收件人</span></div>
+              </div>
+              <div class="detail-grid" id="detailReceiverGrid"></div>
+            </section>
+
+            <!-- 解决方案 -->
+            <section class="detail-section" id="secSolution">
+              <div class="detail-section-head">
+                <div class="detail-section-title"><span>解决方案</span></div>
+              </div>
+              <div class="detail-empty">暂无解决方案记录</div>
+            </section>
+
+            <!-- 日志 -->
+            <section class="detail-section" id="secLog">
+              <div class="detail-section-head">
+                <div class="detail-section-title"><span>日志</span></div>
+                <div class="log-toggle" id="logToggle">
+                  <button type="button" class="active" data-mode="table">表格</button>
+                  <button type="button" data-mode="timeline">时间线</button>
+                </div>
+              </div>
+              <div id="logTableWrap">
+                <table class="log-table">
+                  <thead>
+                    <tr>
+                      <th>操作类型</th>
+                      <th>描述</th>
+                      <th>状态</th>
+                      <th>错误信息</th>
+                      <th>操作人</th>
+                      <th>时间</th>
+                    </tr>
+                  </thead>
+                  <tbody id="logTbody"></tbody>
+                </table>
+              </div>
+              <div id="logTimelineWrap" style="display: none;"></div>
+            </section>
+          </div>
+
+          <!-- 右侧：工单详情导航 -->
+          <aside class="detail-side">
+            <div class="detail-side-title">工单详情</div>
+            <ul class="detail-side-menu" id="detailSideMenu">
+              <li class="active" data-target="secInfo">工单信息</li>
+              <li data-target="secReceiver">收件人信息</li>
+              <li data-target="secSolution">解决方案</li>
+              <li data-target="secLog">操作日志</li>
+            </ul>
+          </aside>
+        </div>
+      </div>
     </main>
   </div>
 
@@ -1950,6 +2472,10 @@
     <div class="modal">
       <div class="modal-header">
         <span class="modal-title">转客户中心</span>
+        <button type="button" class="cust-history-entry" id="transferHistoryEntry">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M12 7v5l4 2"/></svg>
+          转客服中心历史记录
+        </button>
         <button type="button" class="modal-close" aria-label="关闭">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
         </button>
@@ -1957,23 +2483,38 @@
       <hr class="modal-divider">
       <div class="modal-body">
         <div class="transfer-info">
-          <div class="transfer-filter">
+          <div class="transfer-filter cust-transfer-filter">
             <label>运单号</label>
-            <input type="text" class="form-input" id="transferWaybillSearch" placeholder="请输入运单号搜索">
+            <div class="input-with-action">
+              <input type="text" class="form-input" id="transferWaybillInput" placeholder="请输入运单号">
+              <button type="button" class="input-action">批量输入</button>
+            </div>
             <label>异常原因</label>
-            <select class="transfer-select" id="transferReasonFilter">
-              <option value="">全部</option>
-            </select>
-            <button type="button" class="list-btn primary-outline" id="transferBatchEditBtn">批量填写</button>
-            <button type="button" class="list-btn primary-outline" id="transferResetReasonBtn">重置原因</button>
+            <div class="custom-select multiple searchable" id="transferReasonSelect" data-placeholder="请选择">
+              <div class="custom-select-trigger">
+                <input type="text" class="search-input" placeholder="请选择" readonly>
+                <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+              </div>
+              <div class="custom-select-options"></div>
+            </div>
+            <label>客服</label>
+            <div class="custom-select multiple searchable" id="transferAgentSelect" data-placeholder="请选择">
+              <div class="custom-select-trigger">
+                <input type="text" class="search-input" placeholder="请选择" readonly>
+                <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+              </div>
+              <div class="custom-select-options"></div>
+            </div>
+            <button type="button" class="list-btn primary-outline" id="transferBatchDelBtn">批量删除</button>
           </div>
           <table class="transfer-table" id="transferTable">
             <thead>
               <tr>
                 <th class="col-check"><input type="checkbox" id="transferCheckAll"></th>
                 <th>运单号</th>
-                <th>异常原因（客户中心不展示）</th>
-                <th>异常原因（客户中心展示）</th>
+                <th>异常原因</th>
                 <th>客服</th>
                 <th class="col-op">操作</th>
               </tr>
@@ -1994,7 +2535,11 @@
   <div class="modal-mask" id="transferCustModal">
     <div class="modal">
       <div class="modal-header">
-        <span class="modal-title">转客户处理</span>
+        <span class="modal-title">转国内客服</span>
+        <button type="button" class="cust-history-entry" id="custHistoryEntry">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M12 7v5l4 2"/></svg>
+          转国内客服历史记录
+        </button>
         <button type="button" class="modal-close" aria-label="关闭">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
         </button>
@@ -2002,13 +2547,31 @@
       <hr class="modal-divider">
       <div class="modal-body">
         <div class="transfer-info">
-          <div class="transfer-filter">
+          <div class="transfer-filter cust-transfer-filter">
             <label>运单号</label>
-            <input type="text" class="form-input" id="custWaybillSearch" placeholder="请输入运单号搜索">
+            <div class="input-with-action">
+              <input type="text" class="form-input" id="custWaybillInput" placeholder="请输入运单号">
+              <button type="button" class="input-action">批量输入</button>
+            </div>
             <label>异常原因</label>
-            <select class="transfer-select" id="custReasonFilter">
-              <option value="">全部</option>
-            </select>
+            <div class="custom-select multiple searchable" id="custReasonSelect" data-placeholder="请选择">
+              <div class="custom-select-trigger">
+                <input type="text" class="search-input" placeholder="请选择" readonly>
+                <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+              </div>
+              <div class="custom-select-options"></div>
+            </div>
+            <label>客服</label>
+            <div class="custom-select multiple searchable" id="custAgentSelect" data-placeholder="请选择">
+              <div class="custom-select-trigger">
+                <input type="text" class="search-input" placeholder="请选择" readonly>
+                <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+              </div>
+              <div class="custom-select-options"></div>
+            </div>
+            <button type="button" class="list-btn primary-outline" id="custBatchDelBtn">批量删除</button>
           </div>
           <table class="transfer-table" id="custTable">
             <thead>
@@ -2028,6 +2591,178 @@
       <div class="modal-footer">
         <button type="button" class="btn cancel">取消</button>
         <button type="button" class="btn confirm">确认</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 转客服中心·历史单据（二级弹窗） -->
+  <div class="modal-mask" id="transferHistoryModal">
+    <div class="modal cust-history-modal">
+      <div class="modal-header">
+        <span class="modal-title">转客服中心历史记录</span>
+        <button type="button" class="modal-close" aria-label="关闭">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+        </button>
+      </div>
+      <hr class="modal-divider">
+      <div class="modal-body">
+        <div class="history-filter-card">
+          <div class="history-filter cust-transfer-filter">
+            <label>运单号</label>
+            <div class="input-with-action">
+              <input type="text" class="form-input" id="transferHistWaybillInput" placeholder="请输入运单号">
+              <button type="button" class="input-action">批量输入</button>
+            </div>
+            <label>异常原因</label>
+            <div class="custom-select multiple searchable" id="transferHistReasonSelect" data-placeholder="请选择">
+              <div class="custom-select-trigger">
+                <input type="text" class="search-input" placeholder="请选择" readonly>
+                <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+              </div>
+              <div class="custom-select-options"></div>
+            </div>
+            <label>客服</label>
+            <div class="custom-select multiple searchable" id="transferHistAgentSelect" data-placeholder="请选择">
+              <div class="custom-select-trigger">
+                <input type="text" class="search-input" placeholder="请选择" readonly>
+                <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+              </div>
+              <div class="custom-select-options"></div>
+            </div>
+            <div class="history-filter-group">
+              <label>转单日期</label>
+              <div class="history-date-range">
+                <input type="date" class="history-date-input" id="transferHistDateStart" placeholder="开始日期">
+                <span class="date-sep">至</span>
+                <input type="date" class="history-date-input" id="transferHistDateEnd" placeholder="结束日期">
+              </div>
+            </div>
+            <label>当前状态</label>
+            <div class="custom-select multiple searchable" id="transferHistStatusSelect" data-placeholder="请选择">
+              <div class="custom-select-trigger">
+                <input type="text" class="search-input" placeholder="请选择" readonly>
+                <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+              </div>
+              <div class="custom-select-options"></div>
+            </div>
+            <div class="history-query-action">
+              <button type="button" class="list-btn primary" id="transferHistQueryBtn">查询</button>
+            </div>
+          </div>
+        </div>
+        <div class="history-table-wrap">
+          <table class="history-table" id="transferHistoryTable">
+            <thead>
+              <tr>
+                <th>运单号</th>
+                <th>异常原因</th>
+                <th>客服</th>
+                <th>转单时间</th>
+                <th>撤销时间</th>
+                <th>当前状态</th>
+                <th>撤销操作人</th>
+                <th class="op-col">操作</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <div class="history-pagination">
+          <span class="total" id="transferHistoryTotal">共 0 条</span>
+        </div>
+      </div>
+      <hr class="modal-divider">
+      <div class="modal-footer">
+        <button type="button" class="btn cancel" id="transferHistoryCloseBtn">关闭</button>
+      </div>
+    </div>
+  </div>
+
+<!-- 转客户中心：校验未通过提示弹窗 -->  <!-- 转国内客服·历史单据（二级弹窗） -->
+  <div class="modal-mask" id="custHistoryModal">
+    <div class="modal cust-history-modal">
+      <div class="modal-header">
+        <span class="modal-title">转国内客服历史记录</span>
+        <button type="button" class="modal-close" aria-label="关闭">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+        </button>
+      </div>
+      <hr class="modal-divider">
+      <div class="modal-body">
+        <div class="history-filter-card">
+          <div class="history-filter cust-transfer-filter">
+            <label>运单号</label>
+            <div class="input-with-action">
+              <input type="text" class="form-input" id="histWaybillInput" placeholder="请输入运单号">
+              <button type="button" class="input-action">批量输入</button>
+            </div>
+            <label>异常原因</label>
+            <div class="custom-select multiple searchable" id="histReasonSelect" data-placeholder="请选择">
+              <div class="custom-select-trigger">
+                <input type="text" class="search-input" placeholder="请选择" readonly>
+                <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+              </div>
+              <div class="custom-select-options"></div>
+            </div>
+            <label>客服</label>
+            <div class="custom-select multiple searchable" id="histAgentSelect" data-placeholder="请选择">
+              <div class="custom-select-trigger">
+                <input type="text" class="search-input" placeholder="请选择" readonly>
+                <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+              </div>
+              <div class="custom-select-options"></div>
+            </div>
+            <div class="history-filter-group">
+              <label>转单日期</label>
+              <div class="history-date-range">
+                <input type="date" class="history-date-input" id="histDateStart" placeholder="开始日期">
+                <span class="date-sep">至</span>
+                <input type="date" class="history-date-input" id="histDateEnd" placeholder="结束日期">
+              </div>
+            </div>
+            <label>当前状态</label>
+            <div class="custom-select multiple searchable" id="histStatusSelect" data-placeholder="请选择">
+              <div class="custom-select-trigger">
+                <input type="text" class="search-input" placeholder="请选择" readonly>
+                <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+              </div>
+              <div class="custom-select-options"></div>
+            </div>
+            <div class="history-query-action">
+              <button type="button" class="list-btn primary" id="histQueryBtn">查询</button>
+            </div>
+          </div>
+        </div>
+        <div class="history-table-wrap">
+          <table class="history-table" id="custHistoryTable">
+            <thead>
+              <tr>
+                <th>运单号</th>
+                <th>异常原因</th>
+                <th>客服</th>
+                <th>转单时间</th>
+                <th>撤销时间</th>
+                <th>当前状态</th>
+                <th>撤销操作人</th>
+                <th class="op-col">操作</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <div class="history-pagination">
+          <span class="total" id="custHistoryTotal">共 0 条</span>
+        </div>
+      </div>
+      <hr class="modal-divider">
+      <div class="modal-footer">
+        <button type="button" class="btn cancel" id="custHistoryCloseBtn">关闭</button>
       </div>
     </div>
   </div>
@@ -2052,18 +2787,18 @@
     </div>
   </div>
 
-  <!-- 转客户处理·包含其他客服运单 二次确认 -->
+  <!-- 转国内客服·包含其他客服运单 二次确认 -->
   <div class="modal-mask" id="custOtherAgentModal">
     <div class="modal alert-modal">
       <div class="modal-header">
-        <span class="modal-title">转客户处理确认</span>
+        <span class="modal-title">转国内客服确认</span>
         <button type="button" class="modal-close" aria-label="关闭">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
         </button>
       </div>
       <hr class="modal-divider">
       <div class="modal-body">
-        <div class="alert-content">包含其他客服运单号，请确认是否转客户处理。</div>
+        <div class="alert-content">包含其他客服运单号，请确认是否转国内客服。</div>
       </div>
       <hr class="modal-divider">
       <div class="modal-footer">
@@ -2096,6 +2831,55 @@
       <div class="modal-footer">
         <button type="button" class="btn cancel">取消</button>
         <button type="button" class="btn confirm" id="batchEditReasonConfirm">确认</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 异常原因变更弹窗 -->
+  <div class="modal-mask" id="reasonChangeModal">
+    <div class="modal alert-modal reason-change-modal">
+      <div class="modal-header">
+        <span class="modal-title">异常原因变更</span>
+        <button type="button" class="modal-close" id="reasonChangeClose" aria-label="关闭">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+        </button>
+      </div>
+      <hr class="modal-divider">
+      <div class="modal-body" style="padding: 16px 20px;">
+        <div class="alert-content reason-change-summary">
+          <div><span>已选工单：</span><b id="reasonChangeCount">0</b> 条</div>
+          <div><span>当前异常原因：</span><b id="reasonCurrentValue">-</b></div>
+          <div class="reason-change-waybills"><span>运单号：</span><span id="reasonChangeWaybills">-</span></div>
+        </div>
+        <div class="reason-change-form">
+          <div class="reason-form-item">
+            <label>变更后异常原因 <em>*</em></label>
+            <select id="reasonChangeSelect" class="reason-form-control">
+              <option value="">请选择</option>
+              <option>93-由于天气原因报错延误</option>
+              <option>95-包裹被偷</option>
+              <option>67-包裹丢失</option>
+              <option>116-供应商退件</option>
+              <option>110-包裹破损或污染</option>
+              <option>113-空包</option>
+              <option>无法进入</option>
+              <option>收件拒收</option>
+              <option>地址搬迁</option>
+              <option>交货仓不符</option>
+              <option>地址错误</option>
+            </select>
+          </div>
+          <div class="reason-form-item">
+            <label>变更说明 <em>*</em></label>
+            <textarea id="reasonChangeRemark" class="reason-form-control reason-textarea" placeholder="请输入变更原因或说明"></textarea>
+          </div>
+        </div>
+        <div class="reason-change-tip">提示：批量变更仅支持当前异常原因相同的工单；变更后工单状态不变，系统会记录变更前后值及操作人。</div>
+      </div>
+      <hr class="modal-divider">
+      <div class="modal-footer">
+        <button type="button" class="btn cancel" id="reasonChangeCancel">取消</button>
+        <button type="button" class="btn confirm" id="reasonChangeConfirm">确认变更</button>
       </div>
     </div>
   </div>
@@ -2160,6 +2944,8 @@
     }
 
     document.querySelectorAll('.custom-select').forEach(select => {
+      // 转国内客服弹窗 / 历史记录弹窗内的下拉由其独立逻辑接管（动态选项/多选/模糊搜索）
+      if (select.closest('#transferCustModal') || select.closest('#custHistoryModal') || select.closest('#transferModal')) return;
       const trigger = select.querySelector('.custom-select-trigger');
       const options = select.querySelectorAll('.custom-select-option');
       const placeholder = select.dataset.placeholder || '请选择';
@@ -2530,6 +3316,87 @@
     })();
 
     // ===== 转客户中心弹窗 =====
+    // ===== 通用：「多选 + 模糊搜索」下拉（转客户中心 / 转国内客服 共用） =====
+    function createFilterMultiSelect(selectEl, getValues, stateSet, onCommit, rootEl) {
+      const clickRoot = rootEl;
+      const trigger = selectEl.querySelector('.custom-select-trigger');
+      const searchInput = selectEl.querySelector('.search-input');
+      const optionsBox = selectEl.querySelector('.custom-select-options');
+
+      const updateTrigger = () => {
+        if (stateSet.size === 0) {
+          searchInput.value = '';
+          searchInput.placeholder = '请选择';
+        } else if (stateSet.size === 1) {
+          searchInput.placeholder = '请选择';
+          searchInput.value = Array.from(stateSet)[0];
+        } else {
+          searchInput.placeholder = '请选择';
+          searchInput.value = '已选 ' + stateSet.size + ' 项';
+        }
+      };
+
+      const renderOptions = () => {
+        const term = (selectEl.classList.contains('open') ? searchInput.value.trim() : '').toLowerCase();
+        optionsBox.innerHTML = getValues().map(v => {
+          const checked = stateSet.has(v) ? 'checked' : '';
+          const sel = stateSet.has(v) ? ' selected' : '';
+          return '<label class="custom-select-option' + sel + '">' +
+                 '<input type="checkbox" class="option-checkbox" value="' + v + '" ' + checked + '>' +
+                 '<span>' + v + '</span></label>';
+        }).join('');
+        Array.from(optionsBox.querySelectorAll('.custom-select-option')).forEach(opt => {
+          const text = opt.textContent.toLowerCase();
+          opt.style.display = (!term || text.includes(term)) ? '' : 'none';
+        });
+      };
+
+      const open = () => {
+        clickRoot.querySelectorAll('.custom-select.open').forEach(s => { if (s !== selectEl) s.classList.remove('open'); });
+        selectEl.classList.add('open');
+        searchInput.value = '';
+        searchInput.removeAttribute('readonly');
+        renderOptions();
+        setTimeout(() => searchInput.focus(), 0);
+      };
+      const close = () => {
+        selectEl.classList.remove('open');
+        searchInput.setAttribute('readonly', true);
+        updateTrigger();
+      };
+
+      trigger.addEventListener('click', (e) => {
+        if (e.target.closest('.custom-select-options')) return;
+        e.stopPropagation();
+        selectEl.classList.contains('open') ? close() : open();
+      });
+      searchInput.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (!selectEl.classList.contains('open')) open();
+      });
+      searchInput.addEventListener('input', renderOptions);
+
+      optionsBox.addEventListener('click', (e) => {
+        const opt = e.target.closest('.custom-select-option');
+        if (!opt) return;
+        e.stopPropagation();
+        e.preventDefault();
+        const cb = opt.querySelector('.option-checkbox');
+        const val = cb.value;
+        if (stateSet.has(val)) { stateSet.delete(val); cb.checked = false; opt.classList.remove('selected'); }
+        else { stateSet.add(val); cb.checked = true; opt.classList.add('selected'); }
+        if (onCommit) onCommit();
+        searchInput.focus();
+      });
+
+      clickRoot.addEventListener('click', (e) => {
+        if (!selectEl.contains(e.target)) close();
+      });
+
+      updateTrigger();
+      return { refresh: renderOptions, reset: () => { stateSet.clear(); updateTrigger(); } };
+    }
+
     (function initTransferModal() {
       const modal = document.getElementById('transferModal');
       const btn = document.getElementById('transferBtn');
@@ -2591,8 +3458,9 @@
       const confirmBtn = modal.querySelector('.modal-footer .confirm');
       const tbody = modal.querySelector('#transferTable tbody');
       const checkAll = modal.querySelector('#transferCheckAll');
-      const searchInput = modal.querySelector('#transferWaybillSearch');
-      const reasonFilter = modal.querySelector('#transferReasonFilter');
+      const waybillInput = modal.querySelector('#transferWaybillInput');
+      const reasonSelectEl = modal.querySelector('#transferReasonSelect');
+      const agentSelectEl = modal.querySelector('#transferAgentSelect');
 
       // 模拟 20 条数据
       const mockReasons = ['93-由于天气原因报错延误', '95-包裹被偷', '67-包裹丢失', '116-供应商退件', '其它异常'];
@@ -2626,96 +3494,32 @@
             '<td class="col-check"><input type="checkbox"></td>' +
             '<td>' + r.waybill + '</td>' +
             '<td>' + r.reason + '</td>' +
-            '<td><input type="text" class="transfer-reason-input" value="' + displayReason + '" data-default="' + displayReason + '"></td>' +
             '<td>' + r.agent + '</td>' +
             '<td class="col-op"><button type="button" class="row-del">删除</button></td>';
           tbody.appendChild(tr);
         });
       };
 
-      // 异常原因下拉：只显示当前已有的异常原因（去重）
-      const fillReasonOptions = () => {
-        const reasons = Array.from(new Set(rows.map(r => r.reason)));
-        reasonFilter.innerHTML = '<option value="">全部</option>' +
-          reasons.map(r => '<option value="' + r + '">' + r + '</option>').join('');
-      };
+      // 筛选条件：异常原因 / 客服（多选 + 模糊搜索），运单号（文本模糊）
+      const filterState = { reason: new Set(), agent: new Set() };
+      const reasonMs = createFilterMultiSelect(reasonSelectEl, () => Array.from(new Set(rows.map(r => r.reason))), filterState.reason, applyFilter, modal);
+      const agentMs = createFilterMultiSelect(agentSelectEl, () => Array.from(new Set(rows.map(r => r.agent))), filterState.agent, applyFilter, modal);
 
-      // 筛选：运单号 + 异常原因
-      const applyFilter = () => {
-        const kw = searchInput.value.trim().toLowerCase();
-        const reasonVal = reasonFilter.value;
+      function applyFilter() {
+        const kw = waybillInput.value.trim().toLowerCase();
         tbody.querySelectorAll('tr').forEach(tr => {
-          const wb = tr.children[1].textContent.trim().toLowerCase();
+          const wb = tr.children[1].textContent.trim();
           const rsn = tr.children[2].textContent.trim();
-          const okWb = !kw || wb.includes(kw);
-          const okRsn = !reasonVal || rsn === reasonVal;
-          tr.style.display = (okWb && okRsn) ? '' : 'none';
+          const agt = tr.children[3].textContent.trim();
+          const okWb = !kw || wb.toLowerCase().includes(kw);
+          const okRsn = filterState.reason.size === 0 || filterState.reason.has(rsn);
+          const okAg = filterState.agent.size === 0 || filterState.agent.has(agt);
+          tr.style.display = (okWb && okRsn && okAg) ? '' : 'none';
         });
-      };
+      }
 
-      // 运单号：输入即搜索
-      searchInput.addEventListener('input', applyFilter);
-      // 异常原因：选择完即搜索
-      reasonFilter.addEventListener('change', applyFilter);
-
-      // 批量修改异常原因（客户中心展示）
-      const batchEditBtn = modal.querySelector('#transferBatchEditBtn');
-      const batchModal = document.getElementById('batchEditReasonModal');
-      const batchInput = batchModal.querySelector('#batchEditReasonInput');
-      const originDisp = batchModal.querySelector('#batchOriginDisp');
-      const batchConfirm = batchModal.querySelector('#batchEditReasonConfirm');
-      const batchClose = batchModal.querySelector('.modal-close');
-      const batchCancel = batchModal.querySelector('.modal-footer .cancel');
-      const getSelectedVisibleRows = () => Array.from(tbody.querySelectorAll('tr')).filter(tr => {
-        return tr.style.display !== 'none' && tr.querySelector('input[type="checkbox"]').checked;
-      });
-      const openBatchModal = () => {
-        const selRows = getSelectedVisibleRows();
-        if (selRows.length === 0) {
-          alert('请先勾选需要批量修改的数据');
-          return;
-        }
-        // 仅当所选数据的「异常原因（客户中心不展示）」完全相同时，才允许批量填写
-        const reasonSet = new Set(selRows.map(tr => (tr.children[2].textContent || '').trim()));
-        if (reasonSet.size > 1) {
-          alert('所选数据的异常原因不一致，只有选中相同异常原因的数据才可以进行批量填写。');
-          return;
-        }
-        // 展示原异常原因（展示列可能被手工改过，存在多个值）
-        const dispList = Array.from(new Set(selRows.map(tr => {
-          const inp = tr.querySelector('.transfer-reason-input');
-          return (inp && inp.value.trim()) || '';
-        }))).filter(Boolean);
-        originDisp.textContent = dispList.length ? dispList.join('；') : '-';
-        batchInput.value = '';
-        batchModal.classList.add('show');
-      };
-      const closeBatchModal = () => batchModal.classList.remove('show');
-      batchEditBtn.addEventListener('click', openBatchModal);
-      batchConfirm.addEventListener('click', () => {
-        const val = batchInput.value.trim();
-        if (!val) {
-          alert('请输入异常原因（客户中心展示）');
-          return;
-        }
-        getSelectedVisibleRows().forEach(tr => {
-          const inp = tr.querySelector('.transfer-reason-input');
-          if (inp) inp.value = val;
-        });
-        closeBatchModal();
-      });
-      batchClose.addEventListener('click', closeBatchModal);
-      batchCancel.addEventListener('click', closeBatchModal);
-      batchModal.addEventListener('click', (e) => { if (e.target === batchModal) closeBatchModal(); });
-
-      // 重置异常原因（客户中心展示）为默认去前缀值
-      const resetBtn = modal.querySelector('#transferResetReasonBtn');
-      resetBtn.addEventListener('click', () => {
-        tbody.querySelectorAll('tr').forEach(tr => {
-          const inp = tr.querySelector('.transfer-reason-input');
-          if (inp) inp.value = inp.dataset.default || '';
-        });
-      });
+      // 运单号：输入即模糊筛选
+      waybillInput.addEventListener('input', applyFilter);
 
       // 操作列：删除单行
       tbody.addEventListener('click', (e) => {
@@ -2726,14 +3530,37 @@
         const idx = rows.findIndex(x => x.id === id);
         if (idx > -1) rows.splice(idx, 1);
         tr.remove();
-        updateBtnState();
+        checkAll.checked = false;
+        [reasonMs, agentMs].forEach(ms => ms.refresh());
+      });
+
+      // 批量删除：删除当前勾选的行
+      modal.querySelector('#transferBatchDelBtn').addEventListener('click', () => {
+        const checkedTrs = Array.from(tbody.querySelectorAll('tr')).filter(tr => {
+          const cb = tr.querySelector('input[type="checkbox"]');
+          return cb && cb.checked;
+        });
+        if (checkedTrs.length === 0) {
+          alert('请先勾选需要删除的数据');
+          return;
+        }
+        checkedTrs.forEach(tr => {
+          const id = Number(tr.dataset.id);
+          const idx = rows.findIndex(x => x.id === id);
+          if (idx > -1) rows.splice(idx, 1);
+          tr.remove();
+        });
+        checkAll.checked = false;
+        [reasonMs, agentMs].forEach(ms => ms.refresh());
+        applyFilter();
       });
 
       const openModal = () => {
         renderTable();
-        fillReasonOptions();
-        searchInput.value = '';
-        reasonFilter.value = '';
+        waybillInput.value = '';
+        [reasonMs, agentMs].forEach(ms => ms.reset());
+        modal.querySelectorAll('.custom-select').forEach(s => s.classList.remove('open'));
+        checkAll.checked = false;
         applyFilter();
         modal.classList.add('show');
       };
@@ -2771,8 +3598,13 @@
       const confirmBtn = modal.querySelector('.modal-footer .confirm');
       const tbody = modal.querySelector('#custTable tbody');
       const checkAll = modal.querySelector('#custCheckAll');
-      const searchInput = modal.querySelector('#custWaybillSearch');
-      const reasonFilter = modal.querySelector('#custReasonFilter');
+      const waybillInput = modal.querySelector('#custWaybillInput');
+      const reasonSelectEl = modal.querySelector('#custReasonSelect');
+      const agentSelectEl = modal.querySelector('#custAgentSelect');
+      const batchDelBtn = modal.querySelector('#custBatchDelBtn');
+
+      // 三个多选+模糊搜索下拉的当前选中值
+      const filterState = { waybill: new Set(), reason: new Set(), agent: new Set() };
 
       const mockReasons = ['93-由于天气原因报错延误', '95-包裹被偷', '67-包裹丢失', '116-供应商退件', '地址错误'];
       const rows = [];
@@ -2808,26 +3640,114 @@
         });
       };
 
-      const fillReasonOptions = () => {
-        const reasons = Array.from(new Set(rows.map(r => r.reason)));
-        reasonFilter.innerHTML = '<option value="">全部</option>' +
-          reasons.map(r => '<option value="' + r + '">' + r + '</option>').join('');
-      };
+      // —— 构建一个“多选 + 模糊搜索”下拉 ——
+      // selectEl: 容器; values: 全部选项; stateSet: 选中集合; onCommit: 选择变化后回调
+      const buildMultiSelect = (selectEl, getValues, stateSet, onCommit, rootEl) => {
+        const clickRoot = rootEl || modal;
+        const trigger = selectEl.querySelector('.custom-select-trigger');
+        const searchInput = selectEl.querySelector('.search-input');
+        const optionsBox = selectEl.querySelector('.custom-select-options');
 
-      const applyFilter = () => {
-        const kw = searchInput.value.trim().toLowerCase();
-        const reasonVal = reasonFilter.value;
-        tbody.querySelectorAll('tr').forEach(tr => {
-          const wb = tr.children[1].textContent.trim().toLowerCase();
-          const rsn = tr.children[2].textContent.trim();
-          const okWb = !kw || wb.includes(kw);
-          const okRs = !reasonVal || rsn === reasonVal;
-          tr.style.display = (okWb && okRs) ? '' : 'none';
+        const updateTrigger = () => {
+          if (stateSet.size === 0) {
+            searchInput.value = '';
+            searchInput.placeholder = '请选择';
+          } else if (stateSet.size === 1) {
+            searchInput.placeholder = '请选择';
+            searchInput.value = Array.from(stateSet)[0];
+          } else {
+            searchInput.placeholder = '请选择';
+            searchInput.value = '已选 ' + stateSet.size + ' 项';
+          }
+        };
+
+        const renderOptions = () => {
+          const term = (selectEl.classList.contains('open') ? searchInput.value.trim() : '').toLowerCase();
+          // 展开时输入框是搜索词，不应被已选文本污染：打开时清空用于搜索
+          const values = getValues();
+          optionsBox.innerHTML = values.map(v => {
+            const checked = stateSet.has(v) ? 'checked' : '';
+            const sel = stateSet.has(v) ? ' selected' : '';
+            return '<label class="custom-select-option' + sel + '">' +
+                   '<input type="checkbox" class="option-checkbox" value="' + v + '" ' + checked + '>' +
+                   '<span>' + v + '</span></label>';
+          }).join('');
+          // 模糊过滤
+          Array.from(optionsBox.querySelectorAll('.custom-select-option')).forEach(opt => {
+            const text = opt.textContent.toLowerCase();
+            opt.style.display = (!term || text.includes(term)) ? '' : 'none';
+          });
+        };
+
+        const open = () => {
+          // 关闭同一容器内其它已打开的下拉
+          clickRoot.querySelectorAll('.custom-select.open').forEach(s => { if (s !== selectEl) s.classList.remove('open'); });
+          selectEl.classList.add('open');
+          searchInput.value = '';
+          searchInput.removeAttribute('readonly');
+          renderOptions();
+          setTimeout(() => searchInput.focus(), 0);
+        };
+        const close = () => {
+          selectEl.classList.remove('open');
+          searchInput.setAttribute('readonly', true);
+          updateTrigger();
+        };
+
+        trigger.addEventListener('click', (e) => {
+          if (e.target.closest('.custom-select-options')) return;
+          e.stopPropagation();
+          selectEl.classList.contains('open') ? close() : open();
         });
+        searchInput.addEventListener('click', (e) => {
+          e.stopPropagation();
+          if (!selectEl.classList.contains('open')) open();
+        });
+        searchInput.addEventListener('input', renderOptions);
+
+        // 事件委托：勾选
+        optionsBox.addEventListener('click', (e) => {
+          const opt = e.target.closest('.custom-select-option');
+          if (!opt) return;
+          e.stopPropagation();
+          e.preventDefault();
+          const cb = opt.querySelector('.option-checkbox');
+          const val = cb.value;
+          if (stateSet.has(val)) { stateSet.delete(val); cb.checked = false; opt.classList.remove('selected'); }
+          else { stateSet.add(val); cb.checked = true; opt.classList.add('selected'); }
+          onCommit();
+          // 勾选后保持打开、聚焦搜索框（多选场景）
+          searchInput.focus();
+        });
+
+        // 容器内点击空白关闭
+        clickRoot.addEventListener('click', (e) => {
+          if (!selectEl.contains(e.target)) close();
+        });
+
+        updateTrigger();
+        return { refresh: renderOptions, reset: () => { stateSet.clear(); updateTrigger(); } };
       };
 
-      searchInput.addEventListener('input', applyFilter);
-      reasonFilter.addEventListener('change', applyFilter);
+      // 两个多选下拉（异常原因 / 客服）+ 运单号文本模糊搜索
+      const reasonMs = buildMultiSelect(reasonSelectEl, () => Array.from(new Set(rows.map(r => r.reason))), filterState.reason, applyFilter);
+      const agentMs = buildMultiSelect(agentSelectEl, () => Array.from(new Set(rows.map(r => r.agent))), filterState.agent, applyFilter);
+
+      function applyFilter() {
+        const kw = waybillInput.value.trim().toLowerCase();
+        tbody.querySelectorAll('tr').forEach(tr => {
+          const wb = tr.children[1].textContent.trim();
+          const rsn = tr.children[2].textContent.trim();
+          const agt = tr.children[3].textContent.trim();
+          const okWb = !kw || wb.toLowerCase().includes(kw);
+          const okRs = filterState.reason.size === 0 || filterState.reason.has(rsn);
+          const okAg = filterState.agent.size === 0 || filterState.agent.has(agt);
+          tr.style.display = (okWb && okRs && okAg) ? '' : 'none';
+        });
+      }
+
+      // 运单号：输入即模糊筛选
+      waybillInput.addEventListener('input', applyFilter);
 
       checkAll.addEventListener('change', () => {
         tbody.querySelectorAll('tr').forEach(tr => {
@@ -2846,13 +3766,38 @@
         const idx = rows.findIndex(x => x.id === id);
         if (idx > -1) rows.splice(idx, 1);
         tr.remove();
+        checkAll.checked = false;
+      });
+
+      // 批量删除：删除当前勾选的行
+      batchDelBtn.addEventListener('click', () => {
+        const checkedTrs = Array.from(tbody.querySelectorAll('tr')).filter(tr => {
+          const cb = tr.querySelector('input[type="checkbox"]');
+          return cb && cb.checked;
+        });
+        if (checkedTrs.length === 0) {
+          alert('请先勾选需要删除的数据');
+          return;
+        }
+        checkedTrs.forEach(tr => {
+          const id = Number(tr.dataset.id);
+          const idx = rows.findIndex(x => x.id === id);
+          if (idx > -1) rows.splice(idx, 1);
+          tr.remove();
+        });
+        checkAll.checked = false;
+        // 删除后刷新下拉选项（异常原因/客服可能减少）
+        [reasonMs, agentMs].forEach(ms => ms.refresh());
+        applyFilter();
       });
 
       const openModal = () => {
         renderTable();
-        fillReasonOptions();
-        searchInput.value = '';
-        reasonFilter.value = '';
+        // 重置全部筛选
+        waybillInput.value = '';
+        [reasonMs, agentMs].forEach(ms => ms.reset());
+        [reasonSelectEl, agentSelectEl].forEach(s => s.classList.remove('open'));
+        checkAll.checked = false;
         applyFilter();
         modal.classList.add('show');
       };
@@ -2875,7 +3820,7 @@
           return cb && cb.checked;
         });
         if (checkedRows.length === 0) {
-          alert('请先勾选需要转客户处理的数据');
+          alert('请先勾选需要转国内客服的数据');
           return;
         }
 
@@ -2890,7 +3835,7 @@
         if (dupNos) {
           showCustCheck(
             '校验未通过（重复运单号）',
-            '第 ' + dupNos.join('、') + ' 条运单号相同，存在重复运单号，不允许同时转客户处理。'
+            '第 ' + dupNos.join('、') + ' 条运单号相同，存在重复运单号，不允许同时转国内客服。'
           );
           return;
         }
@@ -2911,7 +3856,7 @@
       cancelBtn.addEventListener('click', closeModal);
       const otherAgentModal = document.getElementById('custOtherAgentModal');
       const doSubmitTransfer = () => {
-        alert('已转客户处理');
+        alert('已转国内客服');
         otherAgentModal.classList.remove('show');
         closeModal();
       };
@@ -2933,8 +3878,434 @@
         }
       });
       modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+
+      // ===== 转国内客服历史记录（二级弹窗）=====
+      const historyModal = document.getElementById('custHistoryModal');
+      const historyEntry = document.getElementById('custHistoryEntry');
+      const historyTbody = historyModal.querySelector('#custHistoryTable tbody');
+      const historyTotal = document.getElementById('custHistoryTotal');
+
+      const statusMap = {
+        done: { text: '已处理', cls: 'done' },
+        pending: { text: '未处理', cls: 'pending' },
+        revoked: { text: '已撤销', cls: 'revoked' }
+      };
+
+      // 历史记录 mock 数据
+      const historyRows = [
+        { waybill: 'YWMIA010041857779', reason: '93-由于天气原因报错延误', agent: '王洪生', time: '2026-09-08 10:24:16', status: 'done', operator: '李婷' },
+        { waybill: 'YWMIA010042236924', reason: '95-包裹被偷', agent: '王洪生', time: '2026-09-08 11:02:41', status: 'pending', operator: '李婷' },
+        { waybill: 'YWMIA010042153856', reason: '67-包裹丢失', agent: '王磊', time: '2026-09-07 16:48:09', status: 'revoked', operator: '王磊', revokeTime: '2026-09-07 18:05:22' },
+        { waybill: 'YWMIA010042312192', reason: '116-供应商退件', agent: '王洪生', time: '2026-09-07 09:15:33', status: 'done', operator: '李婷' },
+        { waybill: 'YWMIA010042323549', reason: '地址错误', agent: '王磊', time: '2026-09-06 14:37:52', status: 'pending', operator: '王敏' },
+        { waybill: 'YWMIA010043483464', reason: '93-由于天气原因报错延误', agent: '王洪生', time: '2026-09-06 08:51:27', status: 'done', operator: '张强' },
+        { waybill: 'YWMIA010043934485', reason: '95-包裹被偷', agent: '王洪生', time: '2026-09-05 17:26:04', status: 'revoked', operator: '王洪生', revokeTime: '2026-09-05 19:12:40' }
+      ];
+
+      // 历史弹窗筛选集合（运单号为文本模糊匹配，其余为多选）
+      const histState = { reason: new Set(), agent: new Set(), status: new Set() };
+      const histWaybillInput = historyModal.querySelector('#histWaybillInput');
+      const dateStart = historyModal.querySelector('#histDateStart');
+      const dateEnd = historyModal.querySelector('#histDateEnd');
+
+      const renderHistory = () => {
+        const kw = histWaybillInput.value.trim().toLowerCase();
+        const ds = dateStart.value;   // yyyy-mm-dd
+        const de = dateEnd.value;
+        const list = historyRows.filter(r => {
+          if (kw && !r.waybill.toLowerCase().includes(kw)) return false;
+          if (histState.reason.size && !histState.reason.has(r.reason)) return false;
+          if (histState.agent.size && !histState.agent.has(r.agent)) return false;
+          if (histState.status.size && !histState.status.has(statusMap[r.status].text)) return false;
+          // 按转单日期范围过滤（比较日期部分）
+          const day = r.time.slice(0, 10);
+          if (ds && day < ds) return false;
+          if (de && day > de) return false;
+          return true;
+        });
+        historyTbody.innerHTML = list.map(r => {
+          const st = statusMap[r.status];
+          // 仅“未处理”允许撤销；已处理、已撤销 不允许撤销
+          const canRevoke = r.status === 'pending';
+          const btn = canRevoke
+            ? '<button type="button" class="revoke-btn" data-waybill="' + r.waybill + '">撤销转单</button>'
+            : '<button type="button" class="revoke-btn" disabled>撤销转单</button>';
+          // 操作人：仅“已撤销”展示，且取该单的客服；其余状态为空
+          const operatorText = r.status === 'revoked' ? r.agent : '';
+          // 撤销时间：仅“已撤销”展示，其余状态为空
+          const revokeTimeText = r.status === 'revoked' ? (r.revokeTime || '') : '';
+          return '<tr>' +
+            '<td>' + r.waybill + '</td>' +
+            '<td>' + r.reason + '</td>' +
+            '<td>' + r.agent + '</td>' +
+            '<td>' + r.time + '</td>' +
+            '<td class="revoke-time-cell">' + revokeTimeText + '</td>' +
+            '<td><span class="status-tag ' + st.cls + '">' + st.text + '</span></td>' +
+            '<td class="operator-cell">' + operatorText + '</td>' +
+            '<td class="op-col">' + btn + '</td>' +
+            '</tr>';
+        }).join('');
+        historyTotal.textContent = '共 ' + list.length + ' 条';
+      };
+
+      // 三个多选+模糊搜索下拉（选择只记录条件，点击“查询”后统一筛选；关闭事件绑定到历史弹窗）
+      const noop = () => {};
+      const histReasonMs = buildMultiSelect(historyModal.querySelector('#histReasonSelect'), () => Array.from(new Set(historyRows.map(r => r.reason))), histState.reason, noop, historyModal);
+      const histAgentMs = buildMultiSelect(historyModal.querySelector('#histAgentSelect'), () => Array.from(new Set(historyRows.map(r => r.agent))), histState.agent, noop, historyModal);
+      const histStatusMs = buildMultiSelect(historyModal.querySelector('#histStatusSelect'), () => Array.from(new Set(historyRows.map(r => statusMap[r.status].text))), histState.status, noop, historyModal);
+      const histSelects = [histReasonMs, histAgentMs, histStatusMs];
+
+      const openHistory = () => {
+        histSelects.forEach(ms => ms.reset());
+        histWaybillInput.value = '';
+        // 转单日期默认：当前日期往前一周（含当天共 7 天）
+        const pad2 = (n) => String(n).padStart(2, '0');
+        const fmt = (d) => d.getFullYear() + '-' + pad2(d.getMonth() + 1) + '-' + pad2(d.getDate());
+        const end = new Date();
+        const start = new Date();
+        start.setDate(end.getDate() - 6);
+        dateStart.value = fmt(start);
+        dateEnd.value = fmt(end);
+        historyModal.querySelectorAll('.custom-select').forEach(s => s.classList.remove('open'));
+        renderHistory();
+        historyModal.classList.add('show');
+      };
+      const closeHistory = () => historyModal.classList.remove('show');
+
+      historyEntry.addEventListener('click', (e) => { e.stopPropagation(); openHistory(); });
+      historyModal.querySelector('#custHistoryCloseBtn').addEventListener('click', closeHistory);
+      historyModal.querySelector('.modal-close').addEventListener('click', closeHistory);
+      historyModal.addEventListener('click', (e) => { if (e.target === historyModal) closeHistory(); });
+
+      // 查询按钮：统一应用全部筛选条件
+      historyModal.querySelector('#histQueryBtn').addEventListener('click', renderHistory);
+
+      // 撤销转单（仅未处理可撤销）→ 状态置为「已撤销」并记录撤销时间
+      historyTbody.addEventListener('click', (e) => {
+        const btn = e.target.closest('.revoke-btn');
+        if (!btn || btn.disabled) return;
+        const wb = btn.dataset.waybill;
+        if (window.confirm('确认撤销运单 ' + wb + ' 的转国内客服操作？')) {
+          const row = historyRows.find(r => r.waybill === wb);
+          if (row) {
+            row.status = 'revoked';
+            row.operator = row.agent;
+            const d = new Date();
+            const p2 = (n) => String(n).padStart(2, '0');
+            row.revokeTime = d.getFullYear() + '-' + p2(d.getMonth() + 1) + '-' + p2(d.getDate()) +
+              ' ' + p2(d.getHours()) + ':' + p2(d.getMinutes()) + ':' + p2(d.getSeconds());
+          }
+          renderHistory();
+          alert('已撤销该运单的转国内客服操作');
+        }
+      });
     })();
 
-</script>
+    // ===== 工单详情（列表「详情」按钮进入） =====
+    (function initOrderDetail() {
+      const listView = document.getElementById('listView');
+      const detailView = document.getElementById('detailView');
+      const infoGrid = document.getElementById('detailInfoGrid');
+      const receiverGrid = document.getElementById('detailReceiverGrid');
+      const logTbody = document.getElementById('logTbody');
+      const logTableWrap = document.getElementById('logTableWrap');
+      const logTimelineWrap = document.getElementById('logTimelineWrap');
+      const crumbNo = document.getElementById('detailCrumbNo');
+      const sideMenu = document.getElementById('detailSideMenu');
+
+      const cell = (tr, i) => { const td = tr.children[i]; const t = td ? td.textContent.trim() : ''; return t || '-'; };
+
+      const renderFields = (grid, fields) => {
+        grid.innerHTML = fields.map(f => {
+          let v = f.value || '-';
+          if (f.badge) v = '<span class="detail-badge">' + v + '</span>';
+          return '<div class="detail-field"><div class="f-label">' + f.label + '</div><div class="f-value">' + v + '</div></div>';
+        }).join('');
+      };
+
+      const setSideActive = (target) => {
+        sideMenu.querySelectorAll('li').forEach(li => li.classList.toggle('active', li.dataset.target === target));
+      };
+
+      const openDetail = (tr) => {
+        const orderNo = cell(tr, 29);
+        const statusText = cell(tr, 6).replace(/^[0-9]+-/, '');
+        crumbNo.textContent = orderNo;
+
+        renderFields(infoGrid, [
+          { label: '工单号', value: orderNo },
+          { label: '运单号', value: cell(tr, 2) },
+          { label: '订单号', value: cell(tr, 1) },
+          { label: '新转单号', value: cell(tr, 3) },
+          { label: '状态', value: statusText, badge: true },
+          { label: '异常原因', value: cell(tr, 4) },
+          { label: '派送次数', value: cell(tr, 5) },
+          { label: '是否已通知客户', value: cell(tr, 8) },
+          { label: '上下架状态', value: cell(tr, 9) },
+          { label: '是否已返仓', value: cell(tr, 10) },
+          { label: '业务类型', value: cell(tr, 14) },
+          { label: '订单来源', value: cell(tr, 15) },
+          { label: '操作仓库', value: cell(tr, 16) },
+          { label: '入库仓', value: cell(tr, 18) },
+          { label: '产品号', value: cell(tr, 23) },
+          { label: '销售', value: cell(tr, 11) },
+          { label: '客服', value: cell(tr, 12) },
+          { label: '创建时间', value: cell(tr, 25) },
+          { label: '当地时间', value: cell(tr, 26) },
+          { label: '截止时间', value: cell(tr, 27) },
+          { label: '完成时间', value: cell(tr, 28) },
+          { label: '备注', value: cell(tr, 30) },
+          { label: '是否供应商仓库', value: cell(tr, 31) }
+        ]);
+
+        renderFields(receiverGrid, [
+          { label: '收件人姓名' },
+          { label: '收件人电话' },
+          { label: '收件人邮箱' },
+          { label: '国家' },
+          { label: '州/省' },
+          { label: '城市' },
+          { label: '邮编' },
+          { label: '地址1' },
+          { label: '地址2' },
+          { label: '收件地址' }
+        ]);
+
+        // 日志样例（按时间倒序，最新在前）
+        const logs = [
+          { type: '异常原因变更', desc: '异常原因：93-由于天气原因报错延误 → 地址错误；说明：客户补充地址信息后重新判定', status: '成功', err: '-', user: '王洪生', time: '2026-05-28 11:06:24' },
+          { type: '提供解决方案', desc: '解决方案:退回退件仓付费重派', status: '成功', err: '-', user: '王洪生', time: '2026-05-28 10:38:11' },
+          { type: '转国内客服', desc: '转交国内客服处理，受理客服:王洪生', status: '成功', err: '-', user: '张强', time: '2026-05-27 15:26:48' },
+          { type: '撤销转国内客服', desc: '撤销转交国内客服，原因:异常原因判定有误', status: '成功', err: '-', user: '李婷', time: '2026-05-27 11:02:37' },
+          { type: '转国内客服', desc: '转交国内客服处理，受理客服:王磊', status: '成功', err: '-', user: '李婷', time: '2026-05-27 09:14:22' },
+          { type: '获取运单信息', desc: '', status: '失败', err: 'not found', user: '系统', time: '2026-05-26 17:20:55' },
+          { type: '创建工单', desc: '【历史待处理数据导入】工单号:' + orderNo, status: '成功', err: '-', user: '系统', time: '2026-05-26 17:20:35' }
+        ];
+
+        logTbody.innerHTML = logs.map(l => {
+          const st = l.status === '成功' ? 'log-status-ok' : 'log-status-fail';
+          const ec = l.err === '-' ? '' : 'log-err';
+          return '<tr><td>' + l.type + '</td><td>' + (l.desc || '') + '</td>' +
+            '<td class="' + st + '">' + l.status + '</td>' +
+            '<td class="' + ec + '">' + l.err + '</td>' +
+            '<td>' + l.user + '</td><td>' + l.time + '</td></tr>';
+        }).join('');
+
+        logTimelineWrap.innerHTML = '<div class="log-timeline">' + logs.map(l => {
+          const cls = l.status === '成功' ? 'ok' : 'fail';
+          const errHtml = l.err === '-' ? '' : '<span class="log-err">' + l.err + '</span>';
+          return '<div class="log-tl-item ' + cls + '"><span class="log-tl-dot"></span>' +
+            '<div class="log-tl-title">' + l.type + (l.desc ? '　' + l.desc : '') + '</div>' +
+            '<div class="log-tl-meta"><span>' + l.status + '</span>' + errHtml +
+            '<span>' + l.user + '</span><span>' + l.time + '</span></div></div>';
+        }).join('') + '</div>';
+
+        listView.style.display = 'none';
+        detailView.style.display = '';
+        window.scrollTo(0, 0);
+        setSideActive('secInfo');
+      };
+
+      const closeDetail = () => {
+        detailView.style.display = 'none';
+        listView.style.display = '';
+        window.scrollTo(0, 0);
+      };
+
+      // 列表操作列「详情」
+      document.addEventListener('click', (e) => {
+        const link = e.target.closest('.work-table .action-link');
+        if (!link || link.textContent.trim() !== '详情') return;
+        const tr = link.closest('tr');
+        if (tr) openDetail(tr);
+      });
+
+      document.getElementById('detailBackBtn').addEventListener('click', closeDetail);
+      document.getElementById('detailCrumbHome').addEventListener('click', (e) => { e.preventDefault(); closeDetail(); });
+
+      // 右侧导航：切换高亮 + 定位区块
+      sideMenu.addEventListener('click', (e) => {
+        const li = e.target.closest('li');
+        if (!li) return;
+        setSideActive(li.dataset.target);
+        const sec = document.getElementById(li.dataset.target);
+        if (sec) sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+
+      // 日志：表格 / 时间线
+      const logToggle = document.getElementById('logToggle');
+      logToggle.addEventListener('click', (e) => {
+        const btn = e.target.closest('button');
+        if (!btn) return;
+        logToggle.querySelectorAll('button').forEach(b => b.classList.toggle('active', b === btn));
+        const isTable = btn.dataset.mode === 'table';
+        logTableWrap.style.display = isTable ? '' : 'none';
+        logTimelineWrap.style.display = isTable ? 'none' : '';
+      });
+    })();
+
+    // ===== 转客服中心历史记录（二级弹窗） =====
+    (function initTransferHistoryModal() {
+      const historyModal = document.getElementById('transferHistoryModal');
+      const entry = document.getElementById('transferHistoryEntry');
+      if (!historyModal || !entry) return;
+      const tbody = historyModal.querySelector('#transferHistoryTable tbody');
+      const total = historyModal.querySelector('#transferHistoryTotal');
+      const waybillInput = historyModal.querySelector('#transferHistWaybillInput');
+      const dateStart = historyModal.querySelector('#transferHistDateStart');
+      const dateEnd = historyModal.querySelector('#transferHistDateEnd');
+      const state = { reason: new Set(), agent: new Set(), status: new Set() };
+      const statusMap = {
+        done: { text: '已处理', cls: 'done' },
+        pending: { text: '未处理', cls: 'pending' },
+        revoked: { text: '已撤销', cls: 'revoked' }
+      };
+      // 日期按「今天」动态生成，保证始终落在默认的近 7 天查询区间内
+      const dayOffset = (n) => {
+        const d = new Date();
+        d.setDate(d.getDate() - n);
+        const pad = (x) => String(x).padStart(2, '0');
+        return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate());
+      };
+      // 样例数据：覆盖 未处理 / 已处理 / 已撤销 三种状态
+      const rows = [
+        { waybill: 'YWMIA010041857779', reason: '93-由于天气原因报错延误', agent: '王洪生', time: dayOffset(0) + ' 09:12:35', status: 'pending' },
+        { waybill: 'YWMIA010041858230', reason: '95-包裹被偷', agent: '王磊', time: dayOffset(0) + ' 08:41:07', status: 'pending' },
+        { waybill: 'YWMIA010042236924', reason: '67-包裹丢失', agent: '王洪生', time: dayOffset(1) + ' 17:26:48', status: 'revoked', revokeTime: dayOffset(1) + ' 18:05:22', operator: '李婷' },
+        { waybill: 'YWMIA010042153856', reason: '116-供应商退件', agent: '王洪生', time: dayOffset(1) + ' 11:02:41', status: 'done' },
+        { waybill: 'YWMIA010042312192', reason: '110-包裹破损或污染', agent: '王磊', time: dayOffset(2) + ' 15:48:09', status: 'done' },
+        { waybill: 'YWMIA010042323549', reason: '地址错误', agent: '王洪生', time: dayOffset(2) + ' 10:15:33', status: 'pending' },
+        { waybill: 'YWMIA010043483464', reason: '113-空包', agent: '王洪生', time: dayOffset(3) + ' 14:37:52', status: 'revoked', revokeTime: dayOffset(3) + ' 16:12:40', operator: '王洪生' },
+        { waybill: 'YWMIA010043934485', reason: '无法进入', agent: '王磊', time: dayOffset(4) + ' 09:51:27', status: 'done' },
+        { waybill: 'YWMIA010045880698', reason: '收件拒收', agent: '王洪生', time: dayOffset(4) + ' 16:04:11', status: 'pending' },
+        { waybill: 'YWMIA010046401519', reason: '交货仓不符', agent: '王洪生', time: dayOffset(5) + ' 13:22:05', status: 'revoked', revokeTime: dayOffset(5) + ' 15:40:18', operator: '张强' },
+        { waybill: 'YWMIA010047120433', reason: '93-由于天气原因报错延误', agent: '王磊', time: dayOffset(6) + ' 10:08:52', status: 'done' },
+        { waybill: 'YWMIA010047865214', reason: '67-包裹丢失', agent: '王洪生', time: dayOffset(6) + ' 17:33:29', status: 'pending' }
+      ];
+      const reasonMs = createFilterMultiSelect(historyModal.querySelector('#transferHistReasonSelect'), () => Array.from(new Set(rows.map(r => r.reason))), state.reason, render, historyModal);
+      const agentMs = createFilterMultiSelect(historyModal.querySelector('#transferHistAgentSelect'), () => Array.from(new Set(rows.map(r => r.agent))), state.agent, render, historyModal);
+      const statusMs = createFilterMultiSelect(historyModal.querySelector('#transferHistStatusSelect'), () => Array.from(new Set(rows.map(r => statusMap[r.status].text))), state.status, render, historyModal);
+      const selects = [reasonMs, agentMs, statusMs];
+      function render() {
+        const kw = waybillInput.value.trim().toLowerCase();
+        const ds = dateStart.value;
+        const de = dateEnd.value;
+        const list = rows.filter(r => {
+          if (kw && !r.waybill.toLowerCase().includes(kw)) return false;
+          if (state.reason.size && !state.reason.has(r.reason)) return false;
+          if (state.agent.size && !state.agent.has(r.agent)) return false;
+          if (state.status.size && !state.status.has(statusMap[r.status].text)) return false;
+          const day = r.time.slice(0, 10);
+          return !(ds && day < ds) && !(de && day > de);
+        });
+        tbody.innerHTML = list.map(r => {
+          const st = statusMap[r.status];
+          const operator = r.status === 'revoked' ? (r.operator || r.agent) : '';
+          const revokeTime = r.status === 'revoked' ? (r.revokeTime || '') : '';
+          const action = r.status === 'pending' ? '<button type="button" class="revoke-btn" data-waybill="' + r.waybill + '">撤销转单</button>' : '<button type="button" class="revoke-btn" disabled>撤销转单</button>';
+          return '<tr><td>' + r.waybill + '</td><td>' + r.reason + '</td><td>' + r.agent + '</td><td>' + r.time + '</td><td>' + revokeTime + '</td><td><span class="status-tag ' + st.cls + '">' + st.text + '</span></td><td>' + operator + '</td><td class="op-col">' + action + '</td></tr>';
+        }).join('');
+        total.textContent = '共 ' + list.length + ' 条';
+      }
+      function formatDate(d) { const p = n => String(n).padStart(2, '0'); return d.getFullYear() + '-' + p(d.getMonth() + 1) + '-' + p(d.getDate()); }
+      function openHistory() {
+        selects.forEach(s => s.reset());
+        waybillInput.value = '';
+        const end = new Date(); const start = new Date(); start.setDate(end.getDate() - 6);
+        dateStart.value = formatDate(start); dateEnd.value = formatDate(end);
+        render(); historyModal.classList.add('show');
+      }
+      function closeHistory() { historyModal.classList.remove('show'); }
+      entry.addEventListener('click', e => { e.stopPropagation(); openHistory(); });
+      historyModal.querySelector('.modal-close').addEventListener('click', closeHistory);
+      historyModal.querySelector('#transferHistoryCloseBtn').addEventListener('click', closeHistory);
+      historyModal.querySelector('#transferHistQueryBtn').addEventListener('click', render);
+      historyModal.addEventListener('click', e => { if (e.target === historyModal) closeHistory(); });
+      tbody.addEventListener('click', e => {
+        const btn = e.target.closest('.revoke-btn');
+        if (!btn || btn.disabled) return;
+        const row = rows.find(r => r.waybill === btn.dataset.waybill);
+        if (!row || !window.confirm('确认撤销运单 ' + row.waybill + ' 的转客服中心操作？')) return;
+        row.status = 'revoked'; row.revokeTime = new Date().toLocaleString('zh-CN', { hour12: false }).replace(/\//g, '-');
+        render(); alert('已撤销该运单的转客服中心操作');
+      });
+    })();
+
+    // ===== 异常原因变更 =====
+    (function initReasonChange() {
+      const table = document.querySelector('.work-table');
+      const toolbarBtn = document.getElementById('reasonChangeBtn');
+      const modal = document.getElementById('reasonChangeModal');
+      if (!table || !toolbarBtn || !modal) return;
+      const tbody = table.querySelector('tbody');
+      const countEl = document.getElementById('reasonChangeCount');
+      const currentEl = document.getElementById('reasonCurrentValue');
+      const waybillsEl = document.getElementById('reasonChangeWaybills');
+      const reasonSelect = document.getElementById('reasonChangeSelect');
+      const remarkInput = document.getElementById('reasonChangeRemark');
+      let selectedRows = [];
+
+      const close = () => modal.classList.remove('show');
+      const rowStatus = (row) => (row.children[6]?.textContent || '').trim();
+      const rowReason = (row) => (row.children[4]?.textContent || '').trim();
+      const rowWaybill = (row) => (row.children[2]?.textContent || '').trim();
+      const canChange = (row) => /待处理|已处理/.test(rowStatus(row));
+
+      const promptModal = document.getElementById('transferCheckModal');
+      const promptTitle = promptModal.querySelector('#transferCheckTitle');
+      const promptContent = promptModal.querySelector('#transferCheckContent');
+      function showError(message, title) {
+        promptTitle.textContent = title || '校验未通过';
+        promptContent.textContent = message;
+        promptModal.classList.add('show');
+      }
+
+      function openForRows(rows) {
+        if (!rows.length) { showError('请先勾选需要变更的数据', '校验未通过（未勾选数据）'); return; }
+        const invalid = rows.filter(row => !canChange(row));
+        if (invalid.length) {
+          showError('以下工单状态不支持变更：' + invalid.map(rowWaybill).join('、') + '。仅「待处理 / 已处理」支持变更异常原因。', '校验未通过（状态不支持）');
+          return;
+        }
+        const reasons = [...new Set(rows.map(rowReason))];
+        if (rows.length > 1 && reasons.length !== 1) {
+          showError('批量变更仅支持当前异常原因相同的工单，请重新选择。', '校验未通过（异常原因不一致）');
+          return;
+        }
+        selectedRows = rows;
+        countEl.textContent = rows.length;
+        currentEl.textContent = reasons.length === 1 ? reasons[0] : rowReason(rows[0]);
+        waybillsEl.textContent = rows.map(rowWaybill).join('、');
+        reasonSelect.value = '';
+        remarkInput.value = '';
+        modal.classList.add('show');
+      }
+
+      toolbarBtn.addEventListener('click', () => {
+        const rows = [...tbody.querySelectorAll('tr')].filter(row => row.querySelector('.col-check input')?.checked);
+        openForRows(rows);
+      });
+
+      document.getElementById('reasonChangeClose').addEventListener('click', close);
+      document.getElementById('reasonChangeCancel').addEventListener('click', close);
+      modal.addEventListener('click', (event) => { if (event.target === modal) close(); });
+
+      document.getElementById('reasonChangeConfirm').addEventListener('click', () => {
+        const nextReason = reasonSelect.value.trim();
+        const remark = remarkInput.value.trim();
+        const currentReason = selectedRows.length ? rowReason(selectedRows[0]) : '';
+        if (!nextReason) { showError('请选择变更后异常原因', '校验未通过（未选择异常原因）'); return; }
+        if (nextReason === currentReason) { showError('变更后异常原因不能与当前异常原因相同', '校验未通过（原因相同）'); return; }
+        if (!remark) { showError('请填写变更说明', '校验未通过（未填写变更说明）'); return; }
+        selectedRows.forEach(row => {
+          row.children[4].textContent = nextReason;
+          row.dataset.reasonChanged = 'true';
+          row.dataset.reasonChangeRemark = remark;
+        });
+        close();
+        showError('异常原因变更成功，共更新 ' + selectedRows.length + ' 条工单。', '变更成功');
+      });
+    })();
+  </script>
 </body>
 </html>

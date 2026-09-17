@@ -2225,7 +2225,7 @@
               </div>
             </div>
             <div class="form-item">
-              <label class="form-label">转客户处理</label>
+              <label class="form-label">转国内客服</label>
               <div class="custom-select" id="transferCustFilterSelect" data-placeholder="请选择">
                 <div class="custom-select-trigger">
                   <span class="placeholder">请选择</span>
@@ -2263,7 +2263,7 @@
           </button>
           <button type="button" class="list-btn primary-outline" disabled>
             <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
-            <span>通知客户</span>
+            <span>通知备注</span>
           </button>
           <button type="button" class="list-btn primary-outline" disabled>
             <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><path d="m9 15 2 2 4-4"/></svg>
@@ -2297,7 +2297,7 @@
               <th>派送次数</th>
               <th>状态</th>
               <th>解决方案</th>
-              <th>通知客户</th>
+              <th>通知备注</th>
               <th>上下架状态</th>
               <th>是否已返仓</th>
               <th>销售</th>
@@ -2322,7 +2322,7 @@
               <th>备注</th>
               <th>是否供应商仓库</th>
               <th>转客户中心</th>
-              <th>转客户处理</th>
+              <th>转国内客服</th>
               <th class="action-col">操作</th>
             </tr>
           </thead>
@@ -2397,7 +2397,7 @@
                   </button>
                   <button type="button" class="detail-btn">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
-                    <span>通知客户</span>
+                    <span>通知备注</span>
                   </button>
                   <button type="button" class="detail-btn">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-2.64-6.36"/><polyline points="21 3 21 9 15 9"/></svg>
@@ -2531,7 +2531,7 @@
     </div>
   </div>
 
-    <!-- 转客户处理弹窗（样式参考转客户中心） -->
+    <!-- 转国内客服弹窗（样式参考转客户中心） -->
   <div class="modal-mask" id="transferCustModal">
     <div class="modal">
       <div class="modal-header">
@@ -3589,7 +3589,7 @@
       }
     })();
   
-    /* ===== 转客户处理弹窗（复用转客户中心样式与交互） ===== */
+    /* ===== 转国内客服弹窗（复用转客户中心样式与交互） ===== */
     (function initTransferCustModal() {
       const modal = document.getElementById('transferCustModal');
       const btn = document.getElementById('transferCustBtn');
@@ -3840,7 +3840,7 @@
           return;
         }
 
-        // 规则2：勾选行中存在“转客户处理=是” —— 拦截重复转交
+        // 规则2：勾选行中存在“转国内客服=是” —— 拦截重复转交
         const transferred = checkedRows.filter(tr => {
           const cell = tr.querySelector('.cust-transfer-cell');
           return cell && (cell.dataset.custTransfer === 'yes' || cell.textContent.trim() === '是');
@@ -3861,7 +3861,7 @@
         closeModal();
       };
       otherAgentModal.querySelector('#custOtherContinueBtn').addEventListener('click', doSubmitTransfer);
-      // 取消 / 右上角 ×：仅关闭二次确认框，保留转客户处理弹窗
+      // 取消 / 右上角 ×：仅关闭二次确认框，保留转国内客服弹窗
       const cancelOther = () => otherAgentModal.classList.remove('show');
       otherAgentModal.querySelector('#custOtherCancelBtn').addEventListener('click', cancelOther);
       otherAgentModal.querySelector('.modal-close').addEventListener('click', cancelOther);
